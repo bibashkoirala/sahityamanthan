@@ -1,21 +1,16 @@
-
 from django.contrib import admin
 from django.urls import path, include
-<<<<<<< HEAD
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-=======
 from django.conf import settings
->>>>>>> 39b1aa2cd7d5e395bd101cb19be1ee8235e2214c
 from django.conf.urls.static import static
-from django.views.static import server
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path ('', include('base.urls'))
-    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}), 
-    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-
+    path('', include('base.urls')),
 ]
 
-urlpatterns += staticfiles_urlpatterns()
+# Serve media files during development
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    # Serve static files during development
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

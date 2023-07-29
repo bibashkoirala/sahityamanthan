@@ -12,12 +12,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-import django_heroku
 import dj_database_url
 
 # Heroku: Update database configuration from the environment variable
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES = {'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))}
+# db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES = {
+    'default':
+      dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+      }
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -93,8 +95,6 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -128,14 +128,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-STATIC_ROOT = os.psth.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
