@@ -1,1 +1,3 @@
 web gunicorn sahityamanthan.wsgi:apllication --log-file -
+
+web: python -m pip cache purge && gunicorn sahityamanthan.wsgi
